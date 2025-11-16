@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
   {
     name: 'Disperz',
     description: 'Mass AirDrop Token Contract which is Gas efficient and Fast.',
-    link: '',
+    link: 'https://disperz.netlify.app/',
     video: '',
     id: 'project2',
   },
@@ -49,8 +49,7 @@ export const PROJECTS: Project[] = [
     description:
       'Checks real-time Whales Bitcoin Buy/Sell to predict the price impact on ETH&SOL.',
     link: '',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
+    video: '',
     id: 'project3',
   },
 ]
@@ -61,7 +60,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Telegram Mini-Apps Builder',
     start: '2025',
     end: 'Present',
-    link: 'https://ibelick.com',
+    link: '',
     id: 'work1',
   },
   {
@@ -69,7 +68,7 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Fellowship',
     start: 'July',
     end: 'Aug 2025',
-    link: 'https://ibelick.com',
+    link: '',
     id: 'work2',
   },
 ]
