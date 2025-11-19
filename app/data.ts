@@ -41,7 +41,8 @@ export const PROJECTS: Project[] = [
     name: 'Disperz',
     description: 'Mass AirDrop Token Contract which is Gas efficient and Fast.',
     link: 'https://disperz.netlify.app/',
-    video: '',
+    video:
+      'https://res.cloudinary.com/drlckonat/video/upload/v1763543243/DisperzSample_epf6jp.mov',
     id: 'project2',
   },
   {
