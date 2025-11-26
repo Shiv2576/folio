@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
     name: 'MRT Telegram Bot',
     description:
       'Checks real-time Whales Bitcoin Buy/Sell to predict the price impact on ETH&SOL.',
-    link: '',
+    link: 'https://mrt-nu.vercel.app/',
     video: '',
     id: 'project3',
   },
