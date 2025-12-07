@@ -20,6 +20,18 @@ import {
   SOCIAL_LINKS,
 } from './data'
 
+import {
+  KubernetesIcon,
+  GoIcon,
+  TypeScriptIcon,
+  RedisIcon,
+  GitIcon,
+  PostgreSQLIcon,
+  DockerIcon,
+  SQLIcon,
+  SwiftIcon,
+} from './icons'
+
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
   visible: {
@@ -147,6 +159,23 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
+        <div className="flex flex-row items-center space-x-1">
+          <GoIcon />
+          <TypeScriptIcon />
+          <SwiftIcon />
+          <RedisIcon />
+          <GitIcon />
+          <DockerIcon />
+          <PostgreSQLIcon />
+          <SQLIcon />
+          <KubernetesIcon />
+        </div>
+      </motion.section>
+
+      <motion.section
+        variants={VARIANTS_SECTION}
+        transition={TRANSITION_SECTION}
+      >
         <h3 className="mb-5 text-lg font-medium">Projects</h3>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project) => (
@@ -214,7 +243,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-3 text-lg font-medium">Blog</h3>
+        <h3 className="mb-3 text-lg font-medium">What I'm Learning Now</h3>
         <div className="flex flex-col space-y-0">
           <AnimatedBackground
             enableHover
