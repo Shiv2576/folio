@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     template: '',
   },
   description: '',
+  icons: {
+    icon: '/globe.png',
+    shortcut: '/globe.png',
+    apple: '/globe.png',
+  },
 }
 
 const geist = Geist({
