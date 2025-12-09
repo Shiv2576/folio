@@ -4,6 +4,14 @@ type Project = {
   link: string
   video: string
   id: string
+  widgetData?: PriceWidgetData
+}
+
+export interface PriceWidgetData {
+  symbols: string[]
+  updateInterval: number
+  apiEndpoint?: string
+  showChart?: boolean
 }
 
 type WorkExperience = {
@@ -52,6 +60,12 @@ export const PROJECTS: Project[] = [
     link: 'https://mrt-nu.vercel.app/',
     video: '',
     id: 'project3',
+    widgetData: {
+      symbols: ['BTC', 'ETH', 'SOL'],
+      updateInterval: 5000,
+      apiEndpoint: 'https://api.binance.com/api/v3/ticker/price',
+      showChart: true,
+    },
   },
 ]
 

@@ -32,6 +32,8 @@ import {
   SwiftIcon,
 } from './icons'
 
+import { PriceWidget } from './priceWidget'
+
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
   visible: {
@@ -181,13 +183,31 @@ export default function Personal() {
           {PROJECTS.map((project) => (
             <div key={project.name} className="space-y-2">
               <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                <ProjectVideo src={project.video} />
+                {/* Conditionally render video or widget */}
+                {project.id === 'project3' && project.widgetData ? (
+                  <div className="h-full w-full">
+                    <PriceWidget
+                      symbols={project.widgetData.symbols}
+                      updateInterval={project.widgetData.updateInterval}
+                      apiEndpoint={project.widgetData.apiEndpoint}
+                    />
+                  </div>
+                ) : project.video ? (
+                  <ProjectVideo src={project.video} />
+                ) : (
+                  <div className="flex h-48 items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-900">
+                    <span className="text-zinc-500 dark:text-zinc-400">
+                      No preview available
+                    </span>
+                  </div>
+                )}
               </div>
               <div className="px-1">
                 <a
                   className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
                   href={project.link}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {project.name}
                   <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
