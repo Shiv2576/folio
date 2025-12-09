@@ -52,7 +52,7 @@ export const PriceWidget: React.FC<PriceWidgetProps> = ({
   }, [symbols, updateInterval, apiEndpoint])
 
   return (
-    <div className="-mt-5 h-40 w-full bg-white p-4 dark:bg-black">
+    <div className="h-40 w-full bg-white p-4 dark:bg-black">
       {loading ? (
         <div className="flex h-full items-center justify-center">
           <div className="flex items-center gap-2">
