@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
     name: 'Twap / Spot Oracle',
     description:
       'Websocket streaming service which calculates TWAP for UniswapV3 Pools.',
-    link: '',
+    link: 'https://unistream2.netlify.app/',
     video:
       'https://res.cloudinary.com/drlckonat/video/upload/v1763225815/TwapPreview_avmthi.mp4',
     id: 'project1',
@@ -54,12 +54,20 @@ export const PROJECTS: Project[] = [
     id: 'project2',
   },
   {
+    name: 'Engineering Log',
+    description:
+      'A running log of what I’m building, breaking, and learning while working on real-world systems.',
+    link: '',
+    video: '',
+    id: 'project3',
+  },
+  {
     name: 'MRT Telegram Bot',
     description:
       'Checks real-time Whales Bitcoin Buy/Sell to predict the price impact on ETH&SOL.',
     link: 'https://mrt-nu.vercel.app/',
     video: '',
-    id: 'project3',
+    id: 'project4',
     widgetData: {
       symbols: ['BTC', 'ETH', 'SOL'],
       updateInterval: 5000,
@@ -90,22 +98,23 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Go-Kafka Event Streaming',
-    description: 'A guide on, How Event Streaming works under the hood.',
-    link: '',
+    title: 'Common Go Mistakes',
+    description:
+      'This page is a summary of the mistakes in the 100 Go Mistakes and How to Avoid Them',
+    link: 'https://100go.co/',
     uid: 'blog-1',
   },
   {
     title: 'Exploring Uniswap Contracts (V4 & V3)',
     description:
       'A deep dive into Uniswap Pool Contracts and its Functions & Testing with Foundry',
-    link: '',
+    link: 'https://github.com/Shiv2576/Uniswap_V3_Tests',
     uid: 'blog-2',
   },
   {
     title: "Diving into Apple's CryptoKit & Foundation",
     description: 'A guide on, How to make secured iOS Apps.',
-    link: '',
+    link: 'https://developer.apple.com/documentation/cryptokit',
     uid: 'blog-3',
   },
 ]
