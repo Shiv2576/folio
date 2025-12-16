@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
     name: 'Engineering Log',
     description:
       'A running log of what I’m building, breaking, and learning while working on real-world systems.',
-    link: '',
+    link: 'https://logbook-delta-red.vercel.app',
     video:
       'https://res.cloudinary.com/drlckonat/video/upload/v1765876130/plants_tisgig.mp4',
     id: 'project4',
