@@ -54,26 +54,26 @@ export const PROJECTS: Project[] = [
     id: 'project2',
   },
   {
-    name: 'Engineering Log',
-    description:
-      'A running log of what I’m building, breaking, and learning while working on real-world systems.',
-    link: '',
-    video: '',
-    id: 'project3',
-  },
-  {
     name: 'MRT Telegram Bot',
     description:
       'Checks real-time Whales Bitcoin Buy/Sell to predict the price impact on ETH&SOL.',
     link: 'https://mrt-nu.vercel.app/',
     video: '',
-    id: 'project4',
+    id: 'project3',
     widgetData: {
       symbols: ['BTC', 'ETH', 'SOL'],
       updateInterval: 5000,
       apiEndpoint: 'https://api.binance.com/api/v3/ticker/price',
       showChart: true,
     },
+  },
+  {
+    name: 'Engineering Log',
+    description:
+      'A running log of what I’m building, breaking, and learning while working on real-world systems.',
+    link: '',
+    video: '',
+    id: 'project4',
   },
 ]
 
