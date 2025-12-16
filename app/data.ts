@@ -72,7 +72,8 @@ export const PROJECTS: Project[] = [
     description:
       'A running log of what I’m building, breaking, and learning while working on real-world systems.',
     link: '',
-    video: '',
+    video:
+      'https://res.cloudinary.com/drlckonat/video/upload/v1765876130/plants_tisgig.mp4',
     id: 'project4',
   },
 ]
