@@ -4,85 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smooth Floating Words</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        background-color: #000000;
-        overflow: hidden;
-        width: 100vw;
-        height: 100vh;
-      }
-
-      #wordCanvas {
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+    "
+  >
+    <div
+      id="wordCanvas"
+      style="
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         pointer-events: none;
-      }
-
-      .floating-word {
-        position: absolute;
-        color: #ffffff;
-        font-family: 'Courier New', monospace;
-        font-weight: 300;
-        font-size: 10px;
-        pointer-events: none;
-        user-select: none;
-        white-space: nowrap;
-        opacity: 0; /* Start invisible */
-        will-change: transform, opacity; /* Optimize for animation */
-        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth transition */
-        letter-spacing: 1px;
-        transform: translateZ(0); /* Hardware acceleration */
-      }
-
-      /* Multiple opacity levels for smooth transitions */
-      .opacity-0 {
-        opacity: 0;
-      }
-      .opacity-1 {
-        opacity: 0.1;
-      }
-      .opacity-2 {
-        opacity: 0.2;
-      }
-      .opacity-3 {
-        opacity: 0.3;
-      }
-      .opacity-4 {
-        opacity: 0.4;
-      }
-      .opacity-5 {
-        opacity: 0.5;
-      }
-      .opacity-6 {
-        opacity: 0.6;
-      }
-      .opacity-7 {
-        opacity: 0.7;
-      }
-      .opacity-8 {
-        opacity: 0.8;
-      }
-      .opacity-9 {
-        opacity: 0.9;
-      }
-      .opacity-10 {
-        opacity: 1;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="wordCanvas"></div>
+        background: transparent;
+      "
+    ></div>
 
     <script>
+      // ============================================================================
+      // THEME MANAGEMENT - INLINE STYLES ONLY
+      // ============================================================================
+      let currentTheme = 'dark'
+
+      // Apply theme using inline styles only
+      function applyTheme(theme) {
+        currentTheme = theme
+
+        // Apply color to all existing words with inline styles
+        const color = theme === 'light' ? '#000000' : '#ffffff'
+        document.querySelectorAll('.floating-word').forEach((word) => {
+          word.style.color = color
+        })
+      }
+
+      // Listen for theme changes from parent
+      window.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'THEME_CHANGE') {
+          applyTheme(event.data.theme)
+        }
+      })
+
+      // Apply dark theme immediately on load
+      applyTheme('dark')
+
       // ============================================================================
       // CONFIGURATION
       // ============================================================================
@@ -127,90 +99,47 @@
         ],
 
         // Animation settings
-        FRAME_RATE: 60, // FPS for smooth animation
-        OPACITY_STEPS: 10, // Number of opacity steps (0-10)
-        TRANSITION_DURATION: 2000, // ms for opacity transitions
+        FRAME_RATE: 60,
+        OPACITY_STEPS: 10,
+        TRANSITION_DURATION: 2000,
 
         // Word lifecycle (5 seconds total)
-        LIFESPAN: 5000, // 5 seconds total lifespan
-        FADE_IN_DURATION: 2000, // 1 second to fully appear
-        VISIBLE_DURATION: 1000, // 3 seconds fully visible
-        FADE_OUT_DURATION: 2000, // 1 second to fade out
+        LIFESPAN: 5000,
+        FADE_IN_DURATION: 2000,
+        VISIBLE_DURATION: 1000,
+        FADE_OUT_DURATION: 2000,
 
         // Generation settings
-        GENERATION_RATE: 200, // New word every 200ms
-        MAX_WORDS: 20, // Maximum concurrent words
-        MIN_WORDS: 20, // Minimum words to maintain
+        GENERATION_RATE: 200,
+        MAX_WORDS: 40,
+        MIN_WORDS: 40,
 
         // Movement settings
         MIN_SPEED: 0.2,
         MAX_SPEED: 0.5,
-        DRIFT_VARIATION: 0.1, // Random movement variation
+        DRIFT_VARIATION: 0.1,
       }
-
-      // ============================================================================
-      // GLOBAL VARIABLES
-      // ============================================================================
-      let activeWords = []
-      const wordCanvas = document.getElementById('wordCanvas')
-      let lastFrameTime = 0
-      let frameId = null
-
-      // Calculate frame time based on target FPS
-      const FRAME_TIME = 1000 / CONFIG.FRAME_RATE
 
       // ============================================================================
       // UTILITY FUNCTIONS
       // ============================================================================
 
-      /**
-       * Linear interpolation between two values
-       * @param {number} start - Start value
-       * @param {number} end - End value
-       * @param {number} t - Progress (0 to 1)
-       * @returns {number} Interpolated value
-       */
-      function lerp(start, end, t) {
-        return start * (1 - t) + end * t
-      }
-
-      /**
-       * Clamp a value between min and max
-       * @param {number} value - Value to clamp
-       * @param {number} min - Minimum value
-       * @param {number} max - Maximum value
-       * @returns {number} Clamped value
-       */
       function clamp(value, min, max) {
         return Math.max(min, Math.min(max, value))
       }
 
-      /**
-       * Ease in-out function for smooth transitions
-       * @param {number} t - Progress (0 to 1)
-       * @returns {number} Eased value
-       */
       function easeInOut(t) {
         return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
       }
 
-      /**
-       * Get random item from array
-       */
       function getRandomItem(array) {
         return array[Math.floor(Math.random() * array.length)]
       }
 
-      /**
-       * Get random number between min and max
-       */
       function randomBetween(min, max) {
         return Math.random() * (max - min) + min
       }
 
-      /**
-       * Get random position on screen (with edge bias)
-       */
       function getRandomPosition(edgeBias = 0.3) {
         // 30% chance to spawn from edges
         if (Math.random() < edgeBias) {
@@ -220,22 +149,22 @@
               return {
                 x: randomBetween(0, window.innerWidth),
                 y: -50,
-              } // Top
+              }
             case 1:
               return {
                 x: window.innerWidth + 50,
                 y: randomBetween(0, window.innerHeight),
-              } // Right
+              }
             case 2:
               return {
                 x: randomBetween(0, window.innerWidth),
                 y: window.innerHeight + 50,
-              } // Bottom
+              }
             case 3:
               return {
                 x: -50,
                 y: randomBetween(0, window.innerHeight),
-              } // Left
+              }
           }
         }
 
@@ -250,50 +179,49 @@
       // OPACITY MANAGEMENT
       // ============================================================================
 
-      /**
-       * Set opacity with smooth transition
-       * @param {HTMLElement} element - DOM element
-       * @param {number} opacity - Target opacity (0 to 1)
-       */
       function setOpacity(element, opacity) {
-        // Calculate which opacity class to use
-        const opacityLevel = Math.round(opacity * CONFIG.OPACITY_STEPS)
-        const targetClass = `opacity-${opacityLevel}`
-
-        // Remove all opacity classes
-        for (let i = 0; i <= CONFIG.OPACITY_STEPS; i++) {
-          element.classList.remove(`opacity-${i}`)
-        }
-
-        // Add new opacity class
-        element.classList.add(targetClass)
+        // Direct opacity setting without classes
+        element.style.opacity = opacity
       }
 
       // ============================================================================
-      // WORD LIFE CYCLE MANAGEMENT
+      // WORD CREATION - INLINE STYLES ONLY
       // ============================================================================
 
-      /**
-       * Create a new floating word
-       */
       function createWord() {
         // Check word limit
         if (activeWords.length >= CONFIG.MAX_WORDS) {
           return null
         }
 
-        // Create DOM element
+        // Create DOM element with ALL inline styles
         const wordElement = document.createElement('div')
-        wordElement.className = 'floating-word'
+
+        // ALL STYLES INLINE - no CSS classes
+        wordElement.style.cssText = `
+          position: absolute;
+          font-family: 'Courier New', monospace;
+          font-weight: 300;
+          font-size: 10px;
+          pointer-events: none;
+          user-select: none;
+          white-space: nowrap;
+          opacity: 0;
+          will-change: transform, opacity;
+          transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          letter-spacing: 1px;
+          transform: translateZ(0);
+          color: ${currentTheme === 'light' ? '#000000' : '#ffffff'};
+        `
+
         wordElement.textContent = getRandomItem(CONFIG.WORDS)
 
         // Get random position
         const position = getRandomPosition()
 
-        // Set initial position and opacity
+        // Set initial position
         wordElement.style.left = `${position.x}px`
         wordElement.style.top = `${position.y}px`
-        setOpacity(wordElement, 0)
 
         // Add to DOM
         wordCanvas.appendChild(wordElement)
@@ -320,17 +248,6 @@
           // Current state
           state: 'fadingIn',
           currentOpacity: 0,
-          targetOpacity: 1,
-
-          // Movement variations
-          driftX: 0,
-          driftY: 0,
-          driftTime: 0,
-          driftSpeed: randomBetween(0.5, 2),
-          driftAmount: randomBetween(
-            -CONFIG.DRIFT_VARIATION,
-            CONFIG.DRIFT_VARIATION,
-          ),
         }
 
         // Add to active words
@@ -339,82 +256,55 @@
         return wordObject
       }
 
-      /**
-       * Update a word's opacity based on its lifecycle
-       * @param {Object} word - Word object
-       * @param {number} currentTime - Current timestamp
-       */
       function updateWordOpacity(word, currentTime) {
         if (word.state === 'fadingIn') {
-          // Calculate fade-in progress (0 to 1)
           const progress =
             (currentTime - word.createdAt) / CONFIG.FADE_IN_DURATION
           const easedProgress = easeInOut(clamp(progress, 0, 1))
 
-          // Update opacity
           word.currentOpacity = easedProgress
           setOpacity(word.element, word.currentOpacity)
 
-          // Check if fade-in is complete
           if (currentTime >= word.fadeInEnd) {
             word.state = 'visible'
             word.currentOpacity = 1
             setOpacity(word.element, 1)
           }
         } else if (word.state === 'visible') {
-          // Maintain full opacity
           if (word.currentOpacity !== 1) {
             word.currentOpacity = 1
             setOpacity(word.element, 1)
           }
 
-          // Check if it's time to start fading out
           if (currentTime >= word.fadeOutStart) {
             word.state = 'fadingOut'
           }
         } else if (word.state === 'fadingOut') {
-          // Calculate fade-out progress (0 to 1)
           const progress =
             (currentTime - word.fadeOutStart) / CONFIG.FADE_OUT_DURATION
           const easedProgress = easeInOut(clamp(progress, 0, 1))
 
-          // Update opacity (inverse of progress)
           word.currentOpacity = 1 - easedProgress
           setOpacity(word.element, word.currentOpacity)
 
-          // Check if fade-out is complete
           if (currentTime >= word.expiresAt) {
             word.state = 'expired'
           }
         }
       }
 
-      /**
-       * Remove an expired word
-       * @param {Object} word - Word object to remove
-       * @param {number} index - Index in activeWords array
-       */
       function removeExpiredWord(word, index) {
-        // Remove from DOM
         if (word.element.parentNode) {
           word.element.parentNode.removeChild(word.element)
         }
-
-        // Remove from array
         activeWords.splice(index, 1)
       }
 
-      /**
-       * Continuous word generation
-       */
       function startContinuousGeneration() {
         setInterval(() => {
-          // Maintain minimum word count
           if (activeWords.length < CONFIG.MIN_WORDS) {
             createWord()
-          }
-          // Random chance to generate even if we have enough
-          else if (
+          } else if (
             Math.random() < 0.3 &&
             activeWords.length < CONFIG.MAX_WORDS
           ) {
@@ -424,48 +314,45 @@
       }
 
       // ============================================================================
-      // ANIMATION LOOP - OPTIMIZED FOR SMOOTHNESS
+      // ANIMATION LOOP
       // ============================================================================
 
-      /**
-       * Main animation loop
-       * @param {number} timestamp - Current time from requestAnimationFrame
-       */
+      let activeWords = []
+      const wordCanvas = document.getElementById('wordCanvas')
+      let lastFrameTime = 0
+      let frameId = null
+      const FRAME_TIME = 1000 / CONFIG.FRAME_RATE
+
       function animationLoop(timestamp) {
-        // Calculate time since last frame
         const deltaTime = timestamp - lastFrameTime
 
-        // Only update if enough time has passed for our target FPS
         if (deltaTime >= FRAME_TIME) {
           lastFrameTime = timestamp - (deltaTime % FRAME_TIME)
           const currentTime = Date.now()
 
-          // Update all active words
           for (let i = activeWords.length - 1; i >= 0; i--) {
             const word = activeWords[i]
 
-            // Update opacity based on lifecycle
             updateWordOpacity(word, currentTime)
 
-            // Update movement (only if word is visible)
             if (word.currentOpacity > 0) {
               // Add subtle drifting motion
-              word.driftTime += deltaTime / 1000
-              word.driftX =
-                Math.sin(word.driftTime * word.driftSpeed) * word.driftAmount
-              word.driftY =
-                Math.cos(word.driftTime * word.driftSpeed * 0.7) *
-                word.driftAmount
+              const driftTime = currentTime / 1000
+              const driftX =
+                Math.sin(driftTime * 1.5) *
+                CONFIG.DRIFT_VARIATION *
+                Math.random()
+              const driftY =
+                Math.cos(driftTime * 1.0) *
+                CONFIG.DRIFT_VARIATION *
+                Math.random()
 
-              // Update position
-              word.x += word.speedX + word.driftX
-              word.y += word.speedY + word.driftY
+              word.x += word.speedX + driftX
+              word.y += word.speedY + driftY
 
-              // Apply position with sub-pixel precision
               word.element.style.transform = `translate(${word.x}px, ${word.y}px)`
             }
 
-            // Check for expiration
             if (
               word.state === 'expired' ||
               currentTime > word.expiresAt + 1000
@@ -482,24 +369,15 @@
           }
         }
 
-        // Continue animation loop
         frameId = requestAnimationFrame(animationLoop)
       }
 
-      /**
-       * Start the animation loop
-       */
       function startAnimation() {
         lastFrameTime = performance.now()
         frameId = requestAnimationFrame(animationLoop)
       }
 
-      // ============================================================================
-      // WINDOW RESIZE HANDLER
-      // ============================================================================
-
       function handleResize() {
-        // Adjust word positions to keep them visible
         activeWords.forEach((word) => {
           if (word.x > window.innerWidth) word.x = window.innerWidth - 100
           if (word.y > window.innerHeight) word.y = window.innerHeight - 100
@@ -508,44 +386,23 @@
         })
       }
 
-      // ============================================================================
-      // INITIALIZATION
-      // ============================================================================
-
       function init() {
-        console.log('Initializing smooth word animation system...')
-        console.log(`Target FPS: ${CONFIG.FRAME_RATE}`)
-        console.log(`Word lifespan: ${CONFIG.LIFESPAN}ms (5 seconds)`)
-        console.log(`Opacity steps: ${CONFIG.OPACITY_STEPS}`)
-
         // Create initial words
         const initialCount = Math.min(CONFIG.MIN_WORDS + 20, CONFIG.MAX_WORDS)
         for (let i = 0; i < initialCount; i++) {
           createWord()
         }
 
-        // Start continuous generation
         startContinuousGeneration()
-
-        // Start animation loop
         startAnimation()
-
-        // Setup resize handler
         window.addEventListener('resize', handleResize)
-
-        console.log(`System active with ${activeWords.length} words`)
       }
-
-      // ============================================================================
-      // CLEANUP
-      // ============================================================================
 
       function cleanup() {
         if (frameId) {
           cancelAnimationFrame(frameId)
         }
 
-        // Remove all words
         activeWords.forEach((word) => {
           if (word.element.parentNode) {
             word.element.parentNode.removeChild(word.element)
@@ -559,54 +416,10 @@
       // START SYSTEM
       // ============================================================================
 
-      // Initialize when page loads
-      window.addEventListener('DOMContentLoaded', init)
+      // Start immediately
+      init()
 
-      // Cleanup on page unload
       window.addEventListener('beforeunload', cleanup)
-
-      // ============================================================================
-      // DEBUG CONTROLS (optional - for console)
-      // ============================================================================
-
-      window.wordDebug = {
-        getStats: () => ({
-          activeWords: activeWords.length,
-          minWords: CONFIG.MIN_WORDS,
-          maxWords: CONFIG.MAX_WORDS,
-          generationRate: CONFIG.GENERATION_RATE,
-          lifespan: CONFIG.LIFESPAN,
-          frameRate: CONFIG.FRAME_RATE,
-          opacitySteps: CONFIG.OPACITY_STEPS,
-        }),
-
-        addWord: () => createWord(),
-
-        removeOldest: () => {
-          if (activeWords.length > 0) {
-            const oldest = activeWords.reduce((a, b) =>
-              a.createdAt < b.createdAt ? a : b,
-            )
-            const index = activeWords.indexOf(oldest)
-            if (index > -1) removeExpiredWord(oldest, index)
-          }
-        },
-
-        listWords: () =>
-          activeWords.map((w) => ({
-            word: w.element.textContent,
-            state: w.state,
-            opacity: w.currentOpacity,
-            age: Date.now() - w.createdAt,
-          })),
-
-        cleanup: cleanup,
-
-        restart: () => {
-          cleanup()
-          setTimeout(init, 100)
-        },
-      }
     </script>
   </body>
 </html>

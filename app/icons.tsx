@@ -3,7 +3,6 @@ import React from 'react'
 
 const CDN_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 
-// Ultra-compact, no wrapper background — just inline icon
 const CompactIcon: React.FC<{ src: string; alt: string; label: string }> = ({
   src,
   alt,
@@ -14,7 +13,7 @@ const CompactIcon: React.FC<{ src: string; alt: string; label: string }> = ({
     alt={alt}
     title={label}
     aria-label={label}
-    className="h-8 w-8" // or h-4 w-4 if you prefer even smaller
+    className="h-8 w-8"
   />
 )
 
