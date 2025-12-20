@@ -18,6 +18,8 @@ import {
   BLOG_POSTS,
   EMAIL,
   SOCIAL_LINKS,
+  LOGS,
+  Log,
 } from './data'
 
 import {
@@ -33,6 +35,9 @@ import {
 } from './icons'
 
 import { PriceWidget } from './priceWidget'
+
+import { useState, useEffect } from 'react'
+import GopherEyeTracker from '@/components/ui/eyeTracker'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -137,6 +142,76 @@ function MagneticSocialLink({
   )
 }
 
+//Special One !!!
+const MyHiringComponent = () => {
+  const [selectedLog, setSelectedLog] = useState<Log | null>(null)
+  const [showDialog, setShowDialog] = useState(false)
+  const [currentVideo, setCurrentVideo] = useState<{
+    id: string
+    video: string
+  } | null>(null)
+
+  // Add this useEffect to show dialog automatically on mount
+  useEffect(() => {
+    if (LOGS.length > 0) {
+      // Show dialog for the first log after a short delay
+      const timer = setTimeout(() => {
+        setSelectedLog(LOGS[0])
+        setShowDialog(true)
+      }, 500) // Small delay so page loads first
+
+      return () => clearTimeout(timer)
+    }
+  }, []) // Empty dependency array = run once on mount
+
+  return (
+    <motion.div
+      className="mt-8"
+      variants={VARIANTS_SECTION}
+      transition={TRANSITION_SECTION}
+    >
+      <div className="grid grid-cols-1 gap-6">
+        {LOGS.map((log) => (
+          <div key={log.name} className="space-y-2">
+            <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
+              {/* Rectangular container for LOGS - Shows selected or default video */}
+              <div className="h-full w-full overflow-hidden rounded-xl bg-white dark:bg-black">
+                {currentVideo && currentVideo.id === log.id ? (
+                  <ProjectVideo src={currentVideo.video} />
+                ) : log.video1 ? (
+                  <ProjectVideo src={log.video1} />
+                ) : (
+                  <div className="flex h-full items-center justify-center">
+                    <span className="text-zinc-500 dark:text-zinc-400">
+                      No preview available
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="px-1 text-center">
+              <a
+                className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"
+                href={log.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {log.name}
+                <span className="absolute bottom-0.5 left-0 block h-[1px] w-full max-w-0 bg-zinc-900 transition-all duration-200 group-hover:max-w-full dark:bg-zinc-50"></span>
+              </a>
+              <p className="mt-2 text-base text-zinc-600 dark:text-zinc-400">
+                {log.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Pop-up Dialog */}
+      {/* you supposed to build the form here !!!! */}
+    </motion.div>
+  )
+}
+
 export default function Personal() {
   return (
     <div>
@@ -181,11 +256,13 @@ export default function Personal() {
           transition={TRANSITION_SECTION}
         >
           <h3 className="mb-5 text-lg font-medium">Projects</h3>
+
+          {/* Main Projects Grid */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {PROJECTS.map((project) => (
               <div key={project.name} className="space-y-2">
                 <div className="relative rounded-2xl bg-zinc-50/40 p-1 ring-1 ring-zinc-200/50 ring-inset dark:bg-zinc-950/40 dark:ring-zinc-800/50">
-                  {/* Conditionally render video or widget */}
+                  {/* Project 3 with widget */}
                   {project.id === 'project3' && project.widgetData ? (
                     <div className="h-full w-full">
                       <PriceWidget
@@ -193,6 +270,10 @@ export default function Personal() {
                         updateInterval={project.widgetData.updateInterval}
                         apiEndpoint={project.widgetData.apiEndpoint}
                       />
+                    </div>
+                  ) : project.id === 'project4' ? (
+                    <div className="flex h-full w-full items-center justify-center p-4">
+                      <GopherEyeTracker width={300} height={125} />
                     </div>
                   ) : project.video ? (
                     <ProjectVideo src={project.video} />
@@ -221,6 +302,9 @@ export default function Personal() {
               </div>
             ))}
           </div>
+
+          {/* LOGS Section - Separate motion.div with rectangular dimensions */}
+          <MyHiringComponent />
         </motion.section>
 
         <motion.section

@@ -7,6 +7,14 @@ type Project = {
   widgetData?: PriceWidgetData
 }
 
+export type Log = {
+  name: string
+  description: string
+  link: string
+  video1: string
+  id: string
+}
+
 export interface PriceWidgetData {
   symbols: string[]
   updateInterval: number
@@ -68,13 +76,25 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    name: 'Engineering Log',
+    name: 'Go-Absolute',
     description:
-      'A running log of what I’m building, breaking, and learning while working on real-world systems.',
-    link: 'https://logbook-delta-red.vercel.app',
+      'My journey to mastering backend development with Golang concepts.',
+    link: 'https://goabsolute.netlify.app/',
     video:
       'https://res.cloudinary.com/drlckonat/video/upload/v1765876130/plants_tisgig.mp4',
     id: 'project4',
+  },
+]
+
+export const LOGS: Log[] = [
+  {
+    name: 'Logbook',
+    description:
+      'Just me experimenting with svg Images & Animations with free resources.',
+    link: 'https://logbook-delta-red.vercel.app',
+    video1:
+      'https://res.cloudinary.com/drlckonat/video/upload/v1766232491/animate2_vplclz.mp4',
+    id: 'project5',
   },
 ]
 

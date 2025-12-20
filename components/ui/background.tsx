@@ -90,7 +90,7 @@ const FloatingWords: React.FC<{ className?: string }> = ({ className }) => {
 
     // Position in virtual space
     const width = getViewportWidth()
-    const EXTRA = 0.5
+    const EXTRA = 0.3
     const x = rand(-width * EXTRA, width * (1 + EXTRA))
     const y = rand(0, VIRTUAL_HEIGHT)
     el.style.transform = `translate3d(${x}px, ${y}px, 0)`
@@ -126,7 +126,7 @@ const FloatingWords: React.FC<{ className?: string }> = ({ className }) => {
 
     const now = performance.now()
     const width = getViewportWidth()
-    const EXTRA = 0.5
+    const EXTRA = 0.1
     const wrapLeft = -width * EXTRA
     const wrapRight = width * (1 + EXTRA)
 
