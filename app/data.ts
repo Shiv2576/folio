@@ -100,18 +100,26 @@ export const LOGS: Log[] = [
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
+    company: 'NeuralPrint Online',
+    title: 'Full-Stack Intern',
+    start: 'Oct',
+    end: 'Dec 2025',
+    link: '',
+    id: 'work1',
+  },
+  {
     company: 'TON Blockchain',
     title: 'Telegram Mini-Apps Builder',
-    start: '2025',
-    end: 'Present',
+    start: 'July',
+    end: 'Aug 2024',
     link: '',
     id: 'work1',
   },
   {
     company: 'ChainLink Oracles by Cyfrin',
     title: 'Fellowship',
-    start: 'July',
-    end: 'Aug 2025',
+    start: '',
+    end: '',
     link: '',
     id: 'work2',
   },
