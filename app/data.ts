@@ -88,13 +88,21 @@ export const PROJECTS: Project[] = [
 
 export const LOGS: Log[] = [
   {
+    name: 'Disperz Solidity Contract',
+    description:
+      'Contract was made with Foundry and deployed on Sepolia Testnet',
+    link: 'https://github.com/Shiv2576/Disperz',
+    video1: '',
+    id: 'project1',
+  },
+  {
     name: 'Logbook',
     description:
       'Just me experimenting with svg Images & Animations with free resources.',
     link: 'https://logbook-delta-red.vercel.app',
     video1:
       'https://res.cloudinary.com/drlckonat/video/upload/v1766232491/animate2_vplclz.mp4',
-    id: 'project5',
+    id: 'project2',
   },
 ]
 
