@@ -266,9 +266,8 @@ export default function Personal() {
           <h3 className="mb-5 text-lg font-medium">Work Experience</h3>
           <div className="flex flex-col space-y-2">
             {WORK_EXPERIENCE.map((job) => (
-              <a
+              <div
                 className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
-                target="_blank"
                 rel="noopener noreferrer"
                 key={job.id}
               >
@@ -291,7 +290,7 @@ export default function Personal() {
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </motion.section>

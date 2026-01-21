@@ -21,7 +21,7 @@ const DynamicSVG = () => {
     },
   ]
 
-  const getPathStyle = (opacity) => ({
+  const getPathStyle = (opacity: number) => ({
     transition: 'all 0.3s ease',
     opacity: isHovered ? Math.min(opacity * 1.5, 1) : opacity,
   })

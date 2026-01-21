@@ -71,20 +71,19 @@ export function Footer() {
   }, [])
 
   return (
-    <>
+    <div>
       <footer className="mt-24 border-t border-zinc-100 px-0 py-4 dark:border-zinc-800">
         <div className="flex items-center justify-between">
-          <a target="_blank">
-            <TextLoop className="text-xs text-zinc-500">
-              <span>Yes i did use Ai.</span>
-              <span>Shivang Dixit.</span>
-            </TextLoop>
-          </a>
+          <TextLoop className="text-xs text-zinc-500">
+            <span>Yes i did use Ai.</span>
+            <span>Shivang Dixit.</span>
+          </TextLoop>
+
           <div className="text-xs text-zinc-400">
             <ThemeSwitch />
           </div>
         </div>
       </footer>
-    </>
+    </div>
   )
 }
