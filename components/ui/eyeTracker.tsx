@@ -79,6 +79,7 @@ const GopherEyeTracker: React.FC<GopherEyeTrackerProps> = ({
         viewBox="0 0 401.98 559.472"
         xmlns="http://www.w3.org/2000/svg"
       >
+        <title>Gopher</title>
         {/* Gopher body and static parts */}
         <path
           fillRule="evenodd"

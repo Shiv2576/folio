@@ -27,7 +27,7 @@ type WorkExperience = {
   title: string
   start: string
   end: string
-  link: string
+
   id: string
 }
 
@@ -112,7 +112,6 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Full-Stack Intern',
     start: 'Oct',
     end: 'Dec 2025',
-    link: '',
     id: 'work1',
   },
   {
@@ -120,16 +119,14 @@ export const WORK_EXPERIENCE: WorkExperience[] = [
     title: 'Telegram Mini-Apps Builder',
     start: 'July',
     end: 'Aug 2024',
-    link: '',
-    id: 'work1',
+    id: 'work2',
   },
   {
     company: 'ChainLink Oracles by Cyfrin',
     title: 'Fellowship',
     start: '',
     end: '',
-    link: '',
-    id: 'work2',
+    id: 'work3',
   },
 ]
 

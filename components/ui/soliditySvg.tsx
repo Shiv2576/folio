@@ -45,7 +45,7 @@ const DynamicSVG = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <title>pic</title>
+      <title>Solidity</title>
       {paths.map((path, index) => (
         <path
           key={index}
