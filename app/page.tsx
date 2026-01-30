@@ -259,6 +259,14 @@ export default function Personal() {
           </div>
         </motion.section>
 
+        <div className="relative w-full h-px my-15">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/70 to-transparent">
+            <div className="absolute inset-0 opacity-30 bg-[linear-gradient(90deg,transparent,rgba(0,0,0,0.2)_50%,transparent)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle,#000_1px,transparent_1px)] bg-[length:3px_1px] opacity-10"></div>
+          </div>
+        </div>
+
+
         <motion.section
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
