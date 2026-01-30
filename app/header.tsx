@@ -1,15 +1,14 @@
 'use client'
 import { TextEffect } from '@/components/ui/text-effect'
-import BreathingText from "@/components/fancy/breathing-text"
 import Link from 'next/link'
 import Image from 'next/image'
 
 export function Header() {
   return (
-    <header className="mb-8 flex items-center justify-between">
-      <div className="flex items-center gap-4">
+    <header className="mb-8">
+      <div className="flex items-start gap-4">
         {/* GIF Container */}
-        <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg">
+        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
           <Image
             src="/blackhole.gif"
             alt="Profile GIF"
@@ -19,28 +18,23 @@ export function Header() {
           />
         </div>
 
-        <div>
-          {/* Name with BreathingText */}
-          <Link href="/" className="font-medium text-black dark:text-white block mb-1">
-            <BreathingText
-              staggerDuration={0.08}
-              fromFontVariationSettings="'wght' 100, 'slnt' 0"
-              toFontVariationSettings="'wght' 800, 'slnt' -10"
-              className="text-base sm:text-lg"
-            >
-              Shivang Dixit
-            </BreathingText>
+        {/* Name and Skills */}
+        <div className="pt-1">
+          <Link
+            href="/"
+            className="text-lg font-medium text-black dark:text-white"
+          >
+            Shivang Dixit
           </Link>
-
-          {/* Skills with BreathingText (alternative effect) */}
-          <BreathingText
-            staggerDuration={0.05}
-            fromFontVariationSettings="'wght' 300, 'slnt' 0"
-            toFontVariationSettings="'wght' 600, 'slnt' -5"
-            className="text-sm sm:text-base text-zinc-600 dark:text-zinc-500"
+          <TextEffect
+            as="p"
+            preset="fade"
+            per="char"
+            className="mt-1 text-zinc-600 dark:text-zinc-500"
+            delay={0.5}
           >
             Web-Dev | iOS | Go-Microservices
-          </BreathingText>
+          </TextEffect>
         </div>
       </div>
     </header>
