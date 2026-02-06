@@ -10,7 +10,7 @@ export function Header() {
         {/* GIF Container */}
         <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg">
           <Image
-            src="/blackhole.gif"
+            src="/me.jpg"
             alt="Profile GIF"
             fill
             className="object-cover"
@@ -33,7 +33,7 @@ export function Header() {
             className="mt-1 text-zinc-600 dark:text-zinc-500"
             delay={0.5}
           >
-            Web-Dev | iOS | Go-Microservices
+            Web-Dev | Expo | iOS | Go-Microservices
           </TextEffect>
         </div>
       </div>

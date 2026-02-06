@@ -37,6 +37,16 @@ export const TypeScriptIcon: React.FC = () => (
   />
 )
 
+export const ExpoIcon: React.FC = () => (
+  <div className="opacity-80 brightness-0 filter dark:invert">
+    <CompactIcon
+      src={`${CDN_BASE}/expo/expo-original.svg`}
+      alt="Expo"
+      label="Expo"
+    />
+  </div>
+)
+
 export const SwiftIcon: React.FC = () => (
   <CompactIcon
     src={`${CDN_BASE}/swift/swift-original.svg`}

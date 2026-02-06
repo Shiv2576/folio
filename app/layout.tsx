@@ -5,7 +5,6 @@ import { Header } from './header'
 import { Footer } from './footer'
 import { ThemeProvider } from 'next-themes'
 import { Inter_Tight } from 'next/font/google'
-import FloatingWords from '@/components/ui/background'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -53,7 +52,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <FloatingWords />
           <div className="relative z-10">
             <div className="mx-auto max-w-screen-sm px-4 pt-20">
               <Header />

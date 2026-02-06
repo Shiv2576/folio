@@ -32,6 +32,7 @@ import {
   DockerIcon,
   SQLIcon,
   SwiftIcon,
+  ExpoIcon,
 } from './icons'
 
 import { PriceWidget } from './priceWidget'
@@ -250,6 +251,7 @@ export default function Personal() {
             <GoIcon />
             <TypeScriptIcon />
             <SwiftIcon />
+            <ExpoIcon />
             <RedisIcon />
             <GitIcon />
             <DockerIcon />
